@@ -23,12 +23,12 @@ AFX_STATIC_DATA HPEN _afxBlackDottedPen = 0;
 AFX_STATIC_DATA HPEN _afxBlackSolidPen = 0;
 AFX_STATIC_DATA int _afxHandleSize = 0;
 
-void AFX_CDECL AfxTrackerTerm()
-{
-	AfxDeleteObject((HGDIOBJ*)&_afxHatchBrush);
-	AfxDeleteObject((HGDIOBJ*)&_afxBlackDottedPen);
-}
-char _afxTrackerTerm = (char)atexit(&AfxTrackerTerm);
+//void AFX_CDECL AfxTrackerTerm()
+//{
+//	AfxDeleteObject((HGDIOBJ*)&_afxHatchBrush);
+//	AfxDeleteObject((HGDIOBJ*)&_afxBlackDottedPen);
+//}
+//char _afxTrackerTerm = (char)atexit(&AfxTrackerTerm);
 
 // the struct below is used to determine the qualities of a particular handle
 struct AFX_HANDLEINFO
