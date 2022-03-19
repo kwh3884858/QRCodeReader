@@ -1,0 +1,3 @@
+[submodule "zxing-cpp"]
+	path = Library/zxing-cpp
+	url = https://github.com/kwh3884858/zxing-cpp.git
