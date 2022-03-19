@@ -8,12 +8,15 @@
 *
 ******************************************************************************/
 
+#include "ReadBarcode.h"
+
 #include "stdafx.h"
 #include "Screenshot.h"
 #include "CatchScreenDlg.h"
 
 #include <GdiPlus.h>
 using namespace  Gdiplus;
+using namespace  ZXing;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -407,6 +410,25 @@ HBITMAP CCatchScreenDlg::CopyScreenToBitmap(LPRECT lpRect, BOOL bSave)
 
 		BitBlt(hMemDC, 0, 0, nWidth, nHeight,
 			dcCompatible, nX, nY, SRCCOPY);
+
+		BITMAPINFO bitmapInfo = { 0 };
+		bitmapInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+		GetDIBits(hMemDC, hBitmap, 0, nHeight, NULL, &bitmapInfo, DIB_RGB_COLORS);
+		unsigned char* bitmapBits = new unsigned char[bitmapInfo.bmiHeader.biSizeImage];
+		memset(bitmapBits, 0, bitmapInfo.bmiHeader.biSizeImage);
+		bitmapInfo.bmiHeader.biCompression = BI_RGB;
+		GetDIBits(hMemDC, hBitmap, 0, nHeight, bitmapBits, &bitmapInfo, DIB_RGB_COLORS);
+		DecodeHints hints;
+		ImageView image{ bitmapBits, nWidth, nHeight, ImageFormat::RGBX };
+		Results results = ReadBarcodes(image, hints);
+		if (!results.empty())
+		{
+			for (auto&& result : results)
+			{
+				ShellExecute(nullptr, L"open", result.text().c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+			}
+		}
+		delete[] bitmapBits;
 	}
 	else
 	{
@@ -636,22 +658,22 @@ BOOL CCatchScreenDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 		switch(wmId)
 		{
 		case MyToolBar_ID:
-			AfxMessageBox(_T("矩形"));
+			AfxMessageBox(_T("TODO:矩形"));
 			break;
 		case MyToolBar_ID+1:
-			AfxMessageBox(_T("圆形"));
+			AfxMessageBox(_T("TODO:圆形"));
 			break;
 		case MyToolBar_ID +2:
-			AfxMessageBox(_T("画笔"));
+			AfxMessageBox(_T("TODO:画笔"));
 			break;
 		case MyToolBar_ID +3:
-			AfxMessageBox(_T("马赛克"));
+			AfxMessageBox(_T("TODO:马赛克"));
 			break;
 		case MyToolBar_ID +4:
-			AfxMessageBox(_T("文字"));
+			AfxMessageBox(_T("TODO:文字"));
 			break;
 		case MyToolBar_ID +5:
-			AfxMessageBox(_T("撤销"));
+			AfxMessageBox(_T("TODO:撤销"));
 			break;
 		case MyToolBar_ID +6:
 			CopyScreenToBitmap(m_rectTracker.m_rect, TRUE);
