@@ -36,25 +36,25 @@ public:
 
 	BOOL m_bLBtnDown;
 
-	BOOL m_bNeedShowMsg;            // ÏÔÊ¾½ØÈ¡¾ØĞÎ´óĞ¡ĞÅÏ¢
-	BOOL m_bDraw;                   // ÊÇ·ñÎª½ØÈ¡×´Ì¬
-	BOOL m_bFirstDraw;              // ÊÇ·ñÎªÊ×´Î½ØÈ¡
-	BOOL m_bQuit;                   // ÊÇ·ñÎªÍË³ö
-	CPoint m_startPt;				// ½ØÈ¡¾ØĞÎ×óÉÏ½ÇÎ»ÖÃ
+	BOOL m_bNeedShowMsg;            // æ˜¾ç¤ºæˆªå–çŸ©å½¢å¤§å°ä¿¡æ¯
+	BOOL m_bDraw;                   // æ˜¯å¦ä¸ºæˆªå–çŠ¶æ€
+	BOOL m_bFirstDraw;              // æ˜¯å¦ä¸ºé¦–æ¬¡æˆªå–
+	BOOL m_bQuit;                   // æ˜¯å¦ä¸ºé€€å‡º
+	CPoint m_startPt;				// æˆªå–çŸ©å½¢å·¦ä¸Šè§’ä½ç½®
 	
-	CMyTracker m_rectTracker;       // ÏñÆ¤½îÀà
+	CMyTracker m_rectTracker;       // åƒçš®ç­‹ç±»
 	CBrush   m_brush;			
-    HCURSOR  m_hCursor;             // ¹â±ê
-	CBitmap* m_pBitmap;             // Edit¹ØÁª¿Ø¼şµÄ±³¾°Î»Í¼
+    HCURSOR  m_hCursor;             // å…‰æ ‡
+	CBitmap* m_pBitmap;             // Editå…³è”æ§ä»¶çš„èƒŒæ™¯ä½å›¾
 	HBITMAP m_hBitmap;
 	
-	CRgn m_rgn;						// ±³¾°²Á³ıÇøÓò
+	CRgn m_rgn;						// èƒŒæ™¯æ“¦é™¤åŒºåŸŸ
 
 public:
-	HBITMAP CopyScreenToBitmap(LPRECT lpRect,BOOL bSave=FALSE);   /* ¿½±´×ÀÃæµ½Î»Í¼ */
-	void UpdateTipString();                            //ÏÔÊ¾²Ù×÷ÌáÊ¾ĞÅÏ¢
-	void DrawMessage(CRect &inRect,CDC * pDC);       //ÏÔÊ¾½ØÈ¡¾ØĞÎĞÅÏ¢
-	void InvalidateRgnWindow();                        //ÖØ»­´°¿Ú
+	HBITMAP CopyScreenToBitmap(LPRECT lpRect,BOOL bSave=FALSE);   /* æ‹·è´æ¡Œé¢åˆ°ä½å›¾ */
+	void UpdateTipString();                            //æ˜¾ç¤ºæ“ä½œæç¤ºä¿¡æ¯
+	void DrawMessage(CRect &inRect,CDC * pDC);       //æ˜¾ç¤ºæˆªå–çŸ©å½¢ä¿¡æ¯
+	void InvalidateRgnWindow();                        //é‡ç”»çª—å£
 	void UpdateMousePointRGBString();
 
 	CString m_strRgb;

@@ -203,12 +203,12 @@ void CMyTracker::Draw(CDC* pDC) const
 	{
 		if (m_nStyle & dottedLine)
 		{	
-			//¸Ä±äµ±Ç°¾ØĞÎÑÕÉ«
+			//æ”¹å˜å½“å‰çŸ©å½¢é¢œè‰²
 			pOldPen = pDC->SelectObject(CPen::FromHandle(_afxBlackDottedPen));
 		}
 		else
 		{
-			//¸Ä±äµ±Ç°¾ØĞÎÑÕÉ«
+			//æ”¹å˜å½“å‰çŸ©å½¢é¢œè‰²
 			//pOldPen = (CPen*)pDC->SelectStockObject(BLACK_PEN); //BLACK_PEN
 			pOldPen = pDC->SelectObject(CPen::FromHandle(_afxBlackSolidPen));
 		}
@@ -267,7 +267,7 @@ void CMyTracker::Draw(CDC* pDC) const
 			if (mask & (1<<i))
 			{
 				GetHandleRect((TrackerHit)i, &rect);
-				//¸Ä±äµ±Ç°µ÷ÕûÊÖ±ú¾ØĞÎÑÕÉ«,Ò²¾ÍÊÇÄÇ°Ë¸öµã
+				//æ”¹å˜å½“å‰è°ƒæ•´æ‰‹æŸ„çŸ©å½¢é¢œè‰²,ä¹Ÿå°±æ˜¯é‚£å…«ä¸ªç‚¹
 				pDC->FillSolidRect(rect, m_rectColor);
 			}
 		}
@@ -413,8 +413,8 @@ void CMyTracker::DrawTrackerRect(
 	m_rectLast = rect;
 	m_sizeLast = size;
 */
-	//´Ëº¯ÊıÊÇ»­µ÷Õû´óĞ¡ºÍÎ»ÖÃÊ±»­ĞéÏß
-	//ÓÉÓÚ±¾³ÌĞò²»ĞèÒª,Èç¹ûÒªÕı³£Ê¹×÷µÄ»°°ÑÉÏÃæ×¢Ê¾È¥µô¾ÍĞĞÁË!
+	//æ­¤å‡½æ•°æ˜¯ç”»è°ƒæ•´å¤§å°å’Œä½ç½®æ—¶ç”»è™šçº¿
+	//ç”±äºæœ¬ç¨‹åºä¸éœ€è¦,å¦‚æœè¦æ­£å¸¸ä½¿ä½œçš„è¯æŠŠä¸Šé¢æ³¨ç¤ºå»æ‰å°±è¡Œäº†!
 	((CCatchScreenDlg *)pWnd)->InvalidateRgnWindow();
     
 }
@@ -633,7 +633,7 @@ BOOL CMyTracker::TrackHandle(int nHandle, CWnd* pWnd, CPoint point,
 		if (CWnd::GetCapture() != pWnd)
 			break;
 
-        //Ôö¼ÓµÄ,°ÑÏûÏ¢ÅÉËÍ¸ø´°¿Ú
+        //å¢åŠ çš„,æŠŠæ¶ˆæ¯æ´¾é€ç»™çª—å£
 		DispatchMessage(&msg);
 
 		switch (msg.message)
@@ -778,7 +778,7 @@ UINT CMyTracker::GetHandleMask() const
 }
 
 
-////////////////////Ôö¼ÓµÄº¯Êı/////////////////////////////////////////////////////////////
+////////////////////å¢åŠ çš„å‡½æ•°/////////////////////////////////////////////////////////////
 
 void CMyTracker::SetRectColor(COLORREF rectColor)
 {

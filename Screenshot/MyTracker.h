@@ -30,7 +30,7 @@ public:
 	{
 		solidLine = 1, dottedLine = 2, hatchedBorder = 4,
 		resizeInside = 8, resizeOutside = 16, hatchInside = 32,
-		resizeMiddle =80 //ÉèÖÃÖĞ¼ä
+		resizeMiddle =80 //è®¾ç½®ä¸­é—´
 	};
 
 // Hit-Test codes
@@ -70,18 +70,18 @@ public:
 
 public:
 	//***********************************************************
-	//ÉèÖÃµ÷Õû¹â±ê
+	//è®¾ç½®è°ƒæ•´å…‰æ ‡
 	void SetResizeCursor(UINT nID_N_S,UINT nID_W_E,UINT nID_NW_SE,
 							UINT nID_NE_SW,UINT nIDMiddle);
-	//´´½¨¾ü»­Ë¢,ÄÚ²¿µ÷ÓÃ
+	//åˆ›å»ºå†›ç”»åˆ·,å†…éƒ¨è°ƒç”¨
 	void CreatePen();
-	//ÉèÖÃ¾ØĞÎÑÕÉ«
+	//è®¾ç½®çŸ©å½¢é¢œè‰²
 	void SetRectColor(COLORREF rectColor);
 
 	//**************************************************************
 
     //**************************************************************
-	//µ±Ç°¾ØĞÎÑÕÉ«
+	//å½“å‰çŸ©å½¢é¢œè‰²
 	COLORREF m_rectColor;
     //**************************************************************
 	BOOL m_bAllowInvert;    // flag passed to Track or TrackRubberBand

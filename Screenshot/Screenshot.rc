@@ -54,8 +54,8 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
     "LANGUAGE 4, 2\r\n"
     "#pragma code_page(936)\r\n"
-    "#include ""res\\Screenshot.rc2""  // ·Ç Microsoft Visual C++ ±à¼­µÄ×ÊÔ´\r\n"
-    "#include ""l.CHS\\afxres.rc""      // ±ê×¼×é¼ş\r\n"
+    "#include ""res\\Screenshot.rc2""  // é Microsoft Visual C++ ç¼–è¾‘çš„èµ„æº\r\n"
+    "#include ""l.CHS\\afxres.rc""      // æ ‡å‡†ç»„ä»¶\r\n"
     "#endif\r\n"
     "\0"
 END
@@ -83,7 +83,7 @@ EXSTYLE WS_EX_APPWINDOW
 CAPTION "Screenshot"
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    PUSHBUTTON      "½ØÍ¼",IDC_BTN_START,65,22,50,14
+    PUSHBUTTON      "æˆªå›¾",IDC_BTN_START,65,22,50,14
 END
 
 IDD_DIALOGFORIMG DIALOGEX 0, 0, 169, 140
@@ -117,13 +117,13 @@ BEGIN
     BEGIN
         BLOCK "080403a8"
         BEGIN
-            VALUE "CompanyName", "TODO: <¹«Ë¾Ãû>"
-            VALUE "FileDescription", "TODO: <ÎÄ¼şËµÃ÷>"
+            VALUE "CompanyName", "TODO: <å…¬å¸å>"
+            VALUE "FileDescription", "TODO: <æ–‡ä»¶è¯´æ˜>"
             VALUE "FileVersion", "1.0.0.1"
             VALUE "InternalName", "Screenshot.exe"
-            VALUE "LegalCopyright", "TODO: (C) <¹«Ë¾Ãû>¡£±£ÁôËùÓĞÈ¨Àû¡£"
+            VALUE "LegalCopyright", "TODO: (C) <å…¬å¸å>ã€‚ä¿ç•™æ‰€æœ‰æƒåˆ©ã€‚"
             VALUE "OriginalFilename", "Screenshot.exe"
-            VALUE "ProductName", "TODO: <²úÆ·Ãû>"
+            VALUE "ProductName", "TODO: <äº§å“å>"
             VALUE "ProductVersion", "1.0.0.1"
         END
     END
@@ -208,8 +208,8 @@ IDC_CURSOR1             CURSOR                  "res\\arrow_m.cur"
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE 4, 2
 #pragma code_page(936)
-#include "res\Screenshot.rc2"  // ·Ç Microsoft Visual C++ ±à¼­µÄ×ÊÔ´
-#include "l.CHS\afxres.rc"      // ±ê×¼×é¼ş
+#include "res\Screenshot.rc2"  // é Microsoft Visual C++ ç¼–è¾‘çš„èµ„æº
+#include "l.CHS\afxres.rc"      // æ ‡å‡†ç»„ä»¶
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

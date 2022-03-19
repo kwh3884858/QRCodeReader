@@ -82,16 +82,16 @@ BOOL CMyToolBar::CreateToolBar(HWND hWndParent)
 	for(int i = 0; i < 9; i++)
 	{
 		TBBUTTON tbbutton;
-		// »»ÐÐ
+		// æ¢è¡Œ
 		int wrapnow = 0;
 		//if (i % 2 == 1)
 		//	wrapnow = TBSTATE_WRAP;
 
 		ZeroMemory(&tbbutton, sizeof(TBBUTTON));
 		//tbbutton.iString   = (INT_PTR) tooltips[i];
-		tbbutton.fsStyle   = TBSTYLE_CHECKGROUP; // µ¥Ñ¡ÊôÐÔ
+		tbbutton.fsStyle   = TBSTYLE_CHECKGROUP; // å•é€‰å±žæ€§
 		tbbutton.fsState   = TBSTATE_ENABLED | wrapnow;
-		tbbutton.idCommand = MyToolBar_ID + i; // ¶¨Òå¿Ø¼þµÄid
+		tbbutton.idCommand = MyToolBar_ID + i; // å®šä¹‰æŽ§ä»¶çš„id
 		tbbutton.iBitmap   = i;
 
 		::SendMessage(m_hWnd_toolbar,TB_ADDBUTTONS, 1, (LPARAM) &tbbutton);

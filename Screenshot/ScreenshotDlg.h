@@ -1,27 +1,27 @@
-// ScreenshotDlg.h : Í·ÎÄ¼ş
+// ScreenshotDlg.h : å¤´æ–‡ä»¶
 //
 
 #pragma once
 
-// CScreenshotDlg ¶Ô»°¿ò
+// CScreenshotDlg å¯¹è¯æ¡†
 class CScreenshotDlg : public CDialog
 {
-// ¹¹Ôì
+// æ„é€ 
 public:
-	CScreenshotDlg(CWnd* pParent = NULL);	// ±ê×¼¹¹Ôìº¯Êı
+	CScreenshotDlg(CWnd* pParent = NULL);	// æ ‡å‡†æ„é€ å‡½æ•°
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_SCREENSHOT_DIALOG };
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV æ”¯æŒ
 
 
-// ÊµÏÖ
+// å®ç°
 protected:
 	HICON m_hIcon;
 
-	// Éú³ÉµÄÏûÏ¢Ó³Éäº¯Êı
+	// ç”Ÿæˆçš„æ¶ˆæ¯æ˜ å°„å‡½æ•°
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();

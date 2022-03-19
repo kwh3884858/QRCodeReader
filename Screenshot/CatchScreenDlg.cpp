@@ -27,10 +27,10 @@ CCatchScreenDlg::CCatchScreenDlg(CWnd* pParent /*=NULL*/)
 : CDialog(CCatchScreenDlg::IDD, pParent)
 {
 	m_bLBtnDown = FALSE;
-	//³õÊ¼»¯ÏñÆ¤½îÀà,ĞÂÔöµÄresizeMiddle ÀàĞÍ
+	//åˆå§‹åŒ–åƒçš®ç­‹ç±»,æ–°å¢çš„resizeMiddle ç±»å‹
 	m_rectTracker.m_nStyle = CMyTracker::resizeMiddle | CMyTracker::solidLine;
 	m_rectTracker.m_rect.SetRect(-1, -2, -3, -4);
-	//ÉèÖÃ¾ØĞÎÑÕÉ«
+	//è®¾ç½®çŸ©å½¢é¢œè‰²
 	m_rectTracker.SetRectColor(RGB(10, 100, 130));
 
 	m_hCursor = AfxGetApp()->LoadCursor(IDC_CURSOR1);
@@ -41,16 +41,16 @@ CCatchScreenDlg::CCatchScreenDlg(CWnd* pParent /*=NULL*/)
 	m_bNeedShowMsg = FALSE;
 	m_startPt = 0;
 
-	//»ñÈ¡ÆÁÄ»·Ö±çÂÊ
+	//è·å–å±å¹•åˆ†è¾©ç‡
 	m_xScreen = GetSystemMetrics(SM_CXSCREEN);
 	m_yScreen = GetSystemMetrics(SM_CYSCREEN);
 
-	//½ØÈ¡ÆÁÄ»µ½Î»Í¼ÖĞ
+	//æˆªå–å±å¹•åˆ°ä½å›¾ä¸­
 	CRect rect(0, 0, m_xScreen, m_yScreen);
 	m_hBitmap = CopyScreenToBitmap(&rect);
 	m_pBitmap = CBitmap::FromHandle(m_hBitmap);
 
-	//³õÊ¼»¯Ë¢ĞÂ´°¿ÚÇøÓò m_rgn
+	//åˆå§‹åŒ–åˆ·æ–°çª—å£åŒºåŸŸ m_rgn
 	m_rgn.CreateRectRgn(0, 0, 50, 50);
 }
 
@@ -79,10 +79,10 @@ END_MESSAGE_MAP()
 BOOL CCatchScreenDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	//°Ñ¶Ô»¯¿òÉèÖÃ³ÉÈ«ÆÁ¶¥²ã´°¿Ú
+	//æŠŠå¯¹åŒ–æ¡†è®¾ç½®æˆå…¨å±é¡¶å±‚çª—å£
 	SetWindowPos(&wndTopMost, 0, 0, m_xScreen, m_yScreen, SWP_SHOWWINDOW);
 
-	//ÒÆ¶¯²Ù×÷ÌáÊ¾´°¿Ú
+	//ç§»åŠ¨æ“ä½œæç¤ºçª—å£
 	CRect rect;
 	m_tipEdit.GetWindowRect(&rect);
 	m_tipEdit.MoveWindow(10, 10, rect.Width(), rect.Height());
@@ -102,7 +102,7 @@ BOOL CCatchScreenDlg::OnInitDialog()
  
 void CCatchScreenDlg::OnPaint()
 {
-	// Èç¹û´°¿ÚÊÇ×îĞ¡»¯×´Ì¬
+	// å¦‚æœçª—å£æ˜¯æœ€å°åŒ–çŠ¶æ€
 	if (IsIconic())
 	{
 		CPaintDC dc(this);
@@ -117,7 +117,7 @@ void CCatchScreenDlg::OnPaint()
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
 	}
-	else  // Èç¹û´°¿ÚÕı³£ÏÔÊ¾
+	else  // å¦‚æœçª—å£æ­£å¸¸æ˜¾ç¤º
 	{
 		CPaintDC dc(this);
 
@@ -132,14 +132,14 @@ void CCatchScreenDlg::OnPaint()
 		HBRUSH s_hBitmapBrush = CreatePatternBrush(m_hBitmap); 
 		::FillRect(dcCompatible.m_hDC,&rect,s_hBitmapBrush);
 
-		//ÏÔÊ¾½ØÈ¡¾ØĞÎ´óĞ¡ĞÅÏ¢
+		//æ˜¾ç¤ºæˆªå–çŸ©å½¢å¤§å°ä¿¡æ¯
 		if (m_bNeedShowMsg && m_bFirstDraw)
 		{
 			CRect rect = m_rectTracker.m_rect;
 			DrawMessage(rect, &dcCompatible);
 		}
 
-		//»­³öÏñÆ¤½î¾ØĞÎ
+		//ç”»å‡ºåƒçš®ç­‹çŸ©å½¢
 		if (m_bFirstDraw)
 		{
 			m_rectTracker.Draw(&dcCompatible);
@@ -174,7 +174,7 @@ void CCatchScreenDlg::OnCancel()
 {
 	if (m_bFirstDraw)
 	{
-		//È¡ÏûÒÑ»­¾ØĞÎ±äÁ¿
+		//å–æ¶ˆå·²ç”»çŸ©å½¢å˜é‡
 		m_bFirstDraw = FALSE;
 		m_bDraw = FALSE;
 		m_rectTracker.m_rect.SetRect(-1, -1, -1, -1);
@@ -194,12 +194,12 @@ void CCatchScreenDlg::OnMouseMove(UINT nFlags, CPoint point)
 		m_toolBar.ShowToolBar();
 	if (m_bDraw)
 	{
-		//¶¯Ì¬µ÷Õû¾ØĞÎ´óĞ¡,²¢Ë¢ĞÂ»­³ö
+		//åŠ¨æ€è°ƒæ•´çŸ©å½¢å¤§å°,å¹¶åˆ·æ–°ç”»å‡º
 		m_rectTracker.m_rect.SetRect(m_startPt.x + 4, m_startPt.y + 4, point.x, point.y);
 		InvalidateRgnWindow();
 	}
 	
-	//ÃÖ²¹µ÷Õû´óĞ¡ºÍÎ»ÖÃÊ±,½ÓÊÕ²»µ½MouseMoveÏûÏ¢
+	//å¼¥è¡¥è°ƒæ•´å¤§å°å’Œä½ç½®æ—¶,æ¥æ”¶ä¸åˆ°MouseMoveæ¶ˆæ¯
 	CRect rect;
 	m_tipEdit.GetWindowRect(&rect);
 	if (rect.PtInRect(point))
@@ -216,19 +216,19 @@ void CCatchScreenDlg::OnLButtonDown(UINT nFlags, CPoint point)
 	m_bLBtnDown = TRUE;
 	int nHitTest;
 	nHitTest = m_rectTracker.HitTest(point);
-	//ÅĞ¶Ï»÷ÖĞÎ»ÖÃ
+	//åˆ¤æ–­å‡»ä¸­ä½ç½®
 	if (nHitTest < 0)
 	{
 		if (!m_bFirstDraw)
 		{
-			//µÚÒ»´Î»­¾ØĞÎ
+			//ç¬¬ä¸€æ¬¡ç”»çŸ©å½¢
 			m_startPt = point;
 			m_bDraw = TRUE;
 			m_bFirstDraw = TRUE;
-			//ÉèÖÃµ±Êó±ê°´ÏÂÊ±×îĞ¡µÄ¾ØĞÎ´óĞ¡
+			//è®¾ç½®å½“é¼ æ ‡æŒ‰ä¸‹æ—¶æœ€å°çš„çŸ©å½¢å¤§å°
 			m_rectTracker.m_rect.SetRect(point.x, point.y, point.x + 4, point.y + 4);
 
-			//±£Ö¤µ±Êó±êµ±ÏÂÊ±Á¢¿ÌÏÔÊ¾ĞÅÏ¢
+			//ä¿è¯å½“é¼ æ ‡å½“ä¸‹æ—¶ç«‹åˆ»æ˜¾ç¤ºä¿¡æ¯
 			if (m_bFirstDraw)
 				m_bNeedShowMsg = TRUE;
 			UpdateTipString();
@@ -238,11 +238,11 @@ void CCatchScreenDlg::OnLButtonDown(UINT nFlags, CPoint point)
 	}
 	else
 	{
-		//±£Ö¤µ±Êó±êµ±ÏÂÊ±Á¢¿ÌÏÔÊ¾ĞÅÏ¢
+		//ä¿è¯å½“é¼ æ ‡å½“ä¸‹æ—¶ç«‹åˆ»æ˜¾ç¤ºä¿¡æ¯
 		m_bNeedShowMsg = TRUE;
 		if (m_bFirstDraw)
 		{
-			//µ÷Êø´óĞ¡Ê±,Track»á×Ô¶¯µ÷Õû¾ØĞÎ´óĞ¡,ÔÚĞ©ÆÚ¼ä,ÏûÏ¢¹éCRectTrackerÄÚ²¿´¦Àí
+			//è°ƒæŸå¤§å°æ—¶,Trackä¼šè‡ªåŠ¨è°ƒæ•´çŸ©å½¢å¤§å°,åœ¨äº›æœŸé—´,æ¶ˆæ¯å½’CRectTrackerå†…éƒ¨å¤„ç†
 			m_rectTracker.Track(this, point, TRUE);
 			InvalidateRgnWindow();
 		}
@@ -269,10 +269,10 @@ void CCatchScreenDlg::OnLButtonDblClk(UINT nFlags, CPoint point)
 	int nHitTest;
 	nHitTest = m_rectTracker.HitTest(point);
 
-	//Èç¹ûÔÚÊÇ¾ØĞÎÄÚ²¿Ë«»÷
+	//å¦‚æœåœ¨æ˜¯çŸ©å½¢å†…éƒ¨åŒå‡»
 	if (nHitTest == 8)
 	{
-		//±£´æÎ»Í¼µ½Õ³Ìù°åÖĞ,bSave ÎªTRUE,
+		//ä¿å­˜ä½å›¾åˆ°ç²˜è´´æ¿ä¸­,bSave ä¸ºTRUE,
 		CopyScreenToBitmap(m_rectTracker.m_rect, TRUE);
 		PostQuitMessage(0);
 	}
@@ -292,9 +292,9 @@ void CCatchScreenDlg::OnRButtonUp(UINT nFlags, CPoint point)
 	m_bLBtnDown = FALSE;
 	if (m_bFirstDraw)
 	{
-		//Èç¹ûÒÑ¾­½ØÈ¡¾ØÔòÇå³ı½ØÈ¡¾ØĞÎ
+		//å¦‚æœå·²ç»æˆªå–çŸ©åˆ™æ¸…é™¤æˆªå–çŸ©å½¢
 		m_bFirstDraw = FALSE;
-		//Çå³ı¾ØĞÎ´óĞ¡
+		//æ¸…é™¤çŸ©å½¢å¤§å°
 		m_rectTracker.m_rect.SetRect(-1, -1, -1, -1);
 		UpdateTipString();
 		SetEidtWndText();
@@ -302,7 +302,7 @@ void CCatchScreenDlg::OnRButtonUp(UINT nFlags, CPoint point)
 	}
 	else
 	{
-		//¹Ø±Õ³ÌĞò
+		//å…³é—­ç¨‹åº
 		PostQuitMessage(0);
 	}
 
@@ -313,7 +313,7 @@ HBRUSH CCatchScreenDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
 	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
-	//ÉèÖÃ²Ù×÷ÌáÊ¾´°¿ÚÎÄ±¾ÑÕÉ«
+	//è®¾ç½®æ“ä½œæç¤ºçª—å£æ–‡æœ¬é¢œè‰²
 	if (pWnd->GetDlgCtrlID() == IDC_EDIT1)
 	{
 		pDC->SetTextColor(RGB(247,76,128));
@@ -325,7 +325,7 @@ HBRUSH CCatchScreenDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 BOOL CCatchScreenDlg::OnEraseBkgnd(CDC* pDC)
 {
 	return FALSE;
-	//ÓÃÕû¸ö×ÀÃæÌî³äÈ«ÆÁ¶Ô»°¿ò±³¾°
+	//ç”¨æ•´ä¸ªæ¡Œé¢å¡«å……å…¨å±å¯¹è¯æ¡†èƒŒæ™¯
 	BITMAP bmp;
 	m_pBitmap->GetBitmap(&bmp);
 
@@ -342,46 +342,46 @@ BOOL CCatchScreenDlg::OnEraseBkgnd(CDC* pDC)
 
 BOOL CCatchScreenDlg::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
-	//ÉèÖÃ¸Ä±ä½ØÈ¡¾ØĞÎ´óĞ¡Ê±¹â±ê
+	//è®¾ç½®æ”¹å˜æˆªå–çŸ©å½¢å¤§å°æ—¶å…‰æ ‡
 	if (pWnd == this &&m_rectTracker.SetCursor(this, nHitTest)
-		&& !m_bDraw &&m_bFirstDraw) //´Ë´¦ÅĞ¶Ï±£½ØÈ¡Ê±µ±±êÊ¼ÖĞÎª²ÊÉ«¹â±ê
+		&& !m_bDraw &&m_bFirstDraw) //æ­¤å¤„åˆ¤æ–­ä¿æˆªå–æ—¶å½“æ ‡å§‹ä¸­ä¸ºå½©è‰²å…‰æ ‡
 	{
 		return TRUE;
 	}
 
-	//ÉèÖÃ²ÊÉ«¹â±ê
+	//è®¾ç½®å½©è‰²å…‰æ ‡
 	SetCursor(m_hCursor);
 	return TRUE;
 }
 
-// ¿½±´ÆÁÄ», Õâ¶ÎÔ´ÂëÔ´×ÔCSDN
-// lpRect ´ú±íÑ¡¶¨ÇøÓò
+// æ‹·è´å±å¹•, è¿™æ®µæºç æºè‡ªCSDN
+// lpRect ä»£è¡¨é€‰å®šåŒºåŸŸ
 HBITMAP CCatchScreenDlg::CopyScreenToBitmap(LPRECT lpRect, BOOL bSave)
 
 {
 	HDC       hScrDC, hMemDC;
-	// ÆÁÄ»ºÍÄÚ´æÉè±¸ÃèÊö±í
+	// å±å¹•å’Œå†…å­˜è®¾å¤‡æè¿°è¡¨
 	HBITMAP    hBitmap, hOldBitmap;
-	// Î»Í¼¾ä±ú
+	// ä½å›¾å¥æŸ„
 	int       nX, nY, nX2, nY2;
-	// Ñ¡¶¨ÇøÓò×ø±ê
+	// é€‰å®šåŒºåŸŸåæ ‡
 	int       nWidth, nHeight;
 
-	// È·±£Ñ¡¶¨ÇøÓò²»Îª¿Õ¾ØĞÎ
+	// ç¡®ä¿é€‰å®šåŒºåŸŸä¸ä¸ºç©ºçŸ©å½¢
 	if (IsRectEmpty(lpRect))
 		return NULL;
-	//ÎªÆÁÄ»´´½¨Éè±¸ÃèÊö±í
+	//ä¸ºå±å¹•åˆ›å»ºè®¾å¤‡æè¿°è¡¨
 	hScrDC = CreateDC(_T("DISPLAY"), NULL, NULL, NULL);
 
-	//ÎªÆÁÄ»Éè±¸ÃèÊö±í´´½¨¼æÈİµÄÄÚ´æÉè±¸ÃèÊö±í
+	//ä¸ºå±å¹•è®¾å¤‡æè¿°è¡¨åˆ›å»ºå…¼å®¹çš„å†…å­˜è®¾å¤‡æè¿°è¡¨
 	hMemDC = CreateCompatibleDC(hScrDC);
-	// »ñµÃÑ¡¶¨ÇøÓò×ø±ê
+	// è·å¾—é€‰å®šåŒºåŸŸåæ ‡
 	nX = lpRect->left;
 	nY = lpRect->top;
 	nX2 = lpRect->right;
 	nY2 = lpRect->bottom;
 
-	//È·±£Ñ¡¶¨ÇøÓòÊÇ¿É¼ûµÄ
+	//ç¡®ä¿é€‰å®šåŒºåŸŸæ˜¯å¯è§çš„
 	if (nX < 0)
 		nX = 0;
 	if (nY < 0)
@@ -392,15 +392,15 @@ HBITMAP CCatchScreenDlg::CopyScreenToBitmap(LPRECT lpRect, BOOL bSave)
 		nY2 = m_yScreen;
 	nWidth = nX2 - nX;
 	nHeight = nY2 - nY;
-	// ´´½¨Ò»¸öÓëÆÁÄ»Éè±¸ÃèÊö±í¼æÈİµÄÎ»Í¼
+	// åˆ›å»ºä¸€ä¸ªä¸å±å¹•è®¾å¤‡æè¿°è¡¨å…¼å®¹çš„ä½å›¾
 	hBitmap = CreateCompatibleBitmap
 		(hScrDC, nWidth, nHeight);
-	// °ÑĞÂÎ»Í¼Ñ¡µ½ÄÚ´æÉè±¸ÃèÊö±íÖĞ
+	// æŠŠæ–°ä½å›¾é€‰åˆ°å†…å­˜è®¾å¤‡æè¿°è¡¨ä¸­
 	hOldBitmap = (HBITMAP)SelectObject(hMemDC, hBitmap);
-	// °ÑÆÁÄ»Éè±¸ÃèÊö±í¿½±´µ½ÄÚ´æÉè±¸ÃèÊö±íÖĞ
+	// æŠŠå±å¹•è®¾å¤‡æè¿°è¡¨æ‹·è´åˆ°å†…å­˜è®¾å¤‡æè¿°è¡¨ä¸­
 	if (bSave)
 	{
-		//´´½¨¼æÈİDC,µ±bSaveÎªÖĞÊ±°Ñ¿ªÊ¼±£´æµÄÈ«ÆÁÎ»Í¼,°´½ØÈ¡¾ØĞÎ´óĞ¡±£´æ
+		//åˆ›å»ºå…¼å®¹DC,å½“bSaveä¸ºä¸­æ—¶æŠŠå¼€å§‹ä¿å­˜çš„å…¨å±ä½å›¾,æŒ‰æˆªå–çŸ©å½¢å¤§å°ä¿å­˜
 		CDC dcCompatible;
 		dcCompatible.CreateCompatibleDC(CDC::FromHandle(hMemDC));
 		dcCompatible.SelectObject(m_pBitmap);
@@ -415,8 +415,8 @@ HBITMAP CCatchScreenDlg::CopyScreenToBitmap(LPRECT lpRect, BOOL bSave)
 	}
 
 	hBitmap = (HBITMAP)SelectObject(hMemDC, hOldBitmap);
-	//µÃµ½ÆÁÄ»Î»Í¼µÄ¾ä±ú
-	//Çå³ı 
+	//å¾—åˆ°å±å¹•ä½å›¾çš„å¥æŸ„
+	//æ¸…é™¤ 
 	DeleteDC(hScrDC);
 	DeleteDC(hMemDC);
 
@@ -424,49 +424,49 @@ HBITMAP CCatchScreenDlg::CopyScreenToBitmap(LPRECT lpRect, BOOL bSave)
 	{
 		if (OpenClipboard())
 		{
-			//Çå¿Õ¼ôÌù°å
+			//æ¸…ç©ºå‰ªè´´æ¿
 			EmptyClipboard();
-			//°ÑÆÁÄ»ÄÚÈİÕ³Ìùµ½¼ôÌù°åÉÏ,
-			//hBitmap Îª¸Õ²ÅµÄÆÁÄ»Î»Í¼¾ä±ú
+			//æŠŠå±å¹•å†…å®¹ç²˜è´´åˆ°å‰ªè´´æ¿ä¸Š,
+			//hBitmap ä¸ºåˆšæ‰çš„å±å¹•ä½å›¾å¥æŸ„
 			SetClipboardData(CF_BITMAP, hBitmap);
-			//¹Ø±Õ¼ôÌù°å
+			//å…³é—­å‰ªè´´æ¿
 			CloseClipboard();
 		}
 	}
-	// ·µ»ØÎ»Í¼¾ä±ú
+	// è¿”å›ä½å›¾å¥æŸ„
 	return hBitmap;
 }
 
-// ÏÔÊ¾²Ù×÷ÌáÊ¾ĞÅÏ¢
+// æ˜¾ç¤ºæ“ä½œæç¤ºä¿¡æ¯
 void CCatchScreenDlg::UpdateTipString()
 {
 	CString strTemp;
 	if (!m_bDraw && !m_bFirstDraw)
 	{
-		strTemp = _T("\r\n\r\n¡¤°´ÏÂÊó±ê×ó¼ü²»·ÅÑ¡Ôñ½ØÈ¡\r\n\r\n¡¤ESC¼ü¡¢Êó±êÓÒ¼üÍË³ö");
+		strTemp = _T("\r\n\r\nÂ·æŒ‰ä¸‹é¼ æ ‡å·¦é”®ä¸æ”¾é€‰æ‹©æˆªå–\r\n\r\nÂ·ESCé”®ã€é¼ æ ‡å³é”®é€€å‡º");
 	}
 	else 
 		if (m_bDraw && m_bFirstDraw)
 	{
-		strTemp = _T("\r\n\r\n¡¤ËÉ¿ªÊó±ê×ó¼üÈ·¶¨½ØÈ¡·¶Î§\r\n\r\n¡¤ESC¼üÍË³ö");
+		strTemp = _T("\r\n\r\nÂ·æ¾å¼€é¼ æ ‡å·¦é”®ç¡®å®šæˆªå–èŒƒå›´\r\n\r\nÂ·ESCé”®é€€å‡º");
 	}
 	else if (!m_bDraw && m_bFirstDraw)
 	{
-		CString sudami(_T("\r\n\r\n¡¤¾ØĞÎÄÚË«»÷Êó±ê×ó¼ü±£´æ\r\n\r\n¡¤µã»÷Êó±êÓÒ¼üÖØĞÂÑ¡Ôñ"));
-		strTemp = _T("\r\n\r\n¡¤Êó±êÔÚ¾ØĞÎ±ßÔµµ÷Õû´óĞ¡");
+		CString sudami(_T("\r\n\r\nÂ·çŸ©å½¢å†…åŒå‡»é¼ æ ‡å·¦é”®ä¿å­˜\r\n\r\nÂ·ç‚¹å‡»é¼ æ ‡å³é”®é‡æ–°é€‰æ‹©"));
+		strTemp = _T("\r\n\r\nÂ·é¼ æ ‡åœ¨çŸ©å½¢è¾¹ç¼˜è°ƒæ•´å¤§å°");
 
 		strTemp += sudami;
 	}
 	m_strEditTip = strTemp;
 }
 
-// ÏÔÊ¾½ØÈ¡¾ØĞÎĞÅÏ¢
+// æ˜¾ç¤ºæˆªå–çŸ©å½¢ä¿¡æ¯
 void CCatchScreenDlg::DrawMessage(CRect &inRect, CDC * pDC)
 {
-	//½ØÈ¡¾ØĞÎ´óĞ¡ĞÅÏ¢ÀëÊó±ê¼ä¸ô
+	//æˆªå–çŸ©å½¢å¤§å°ä¿¡æ¯ç¦»é¼ æ ‡é—´éš”
 	const int space = 3;
 
-	//ÉèÖÃ×ÖÌåÑÕÉ«´óĞ¡
+	//è®¾ç½®å­—ä½“é¢œè‰²å¤§å°
 	CPoint pt;
 	CPen pen(PS_SOLID, 1, RGB(47, 79, 79));
 	CPen *pOldPen;
@@ -475,10 +475,10 @@ void CCatchScreenDlg::DrawMessage(CRect &inRect, CDC * pDC)
 	//pDC->SetTextColor(RGB(147,147,147));
 	CFont font;
 	CFont * pOldFont;
-	font.CreatePointFont(90, _T("ËÎÌå"));
+	font.CreatePointFont(90, _T("å®‹ä½“"));
 	pOldFont = pDC->SelectObject(&font);
 
-	//µÃµ½×ÖÌå¿í¶ÈºÍ¸ß¶È
+	//å¾—åˆ°å­—ä½“å®½åº¦å’Œé«˜åº¦
 	GetCursorPos(&pt);
 	int OldBkMode;
 	OldBkMode = pDC->SetBkMode(TRANSPARENT);
@@ -489,18 +489,18 @@ void CCatchScreenDlg::DrawMessage(CRect &inRect, CDC * pDC)
 	int	lineLength;
 	pDC->GetTextMetrics(&tm);
 	charHeight = tm.tmHeight + tm.tmExternalLeading;
-	size = pDC->GetTextExtent(_T("¶¥µãÎ»ÖÃ  "), _tcslen(_T("¶¥µãÎ»ÖÃ  ")));
+	size = pDC->GetTextExtent(_T("é¡¶ç‚¹ä½ç½®  "), _tcslen(_T("é¡¶ç‚¹ä½ç½®  ")));
 	lineLength = size.cx;
 
-	//³õÊ¼»¯¾ØĞÎ, ÒÔ±£Ö¤Ğ´ÏÂÁùĞĞÎÄ×Ö
+	//åˆå§‹åŒ–çŸ©å½¢, ä»¥ä¿è¯å†™ä¸‹å…­è¡Œæ–‡å­—
 	CRect rect(pt.x + space, pt.y - charHeight * 6 - space, pt.x + lineLength + space, pt.y - space);
 
-	//´´½¨ÁÙÊ±¾ØĞÎ
+	//åˆ›å»ºä¸´æ—¶çŸ©å½¢
 	CRect rectTemp;
-	//µ±¾ØĞÎµ½´ï×ÀÃæ±ßÔµÊ±µ÷Õû·½ÏòºÍ´óĞ¡
+	//å½“çŸ©å½¢åˆ°è¾¾æ¡Œé¢è¾¹ç¼˜æ—¶è°ƒæ•´æ–¹å‘å’Œå¤§å°
 	if ((pt.x + rect.Width()) >= m_xScreen)
 	{
-		//×ÀÃæÉÏ·½ÏÔÊ¾²»ÏÂ¾ØĞÎ
+		//æ¡Œé¢ä¸Šæ–¹æ˜¾ç¤ºä¸ä¸‹çŸ©å½¢
 		rectTemp = rect;
 		rectTemp.left = rect.left - rect.Width() - space * 2;
 		rectTemp.right = rect.right - rect.Width() - space * 2;;
@@ -509,22 +509,22 @@ void CCatchScreenDlg::DrawMessage(CRect &inRect, CDC * pDC)
 
 	if ((pt.y - rect.Height()) <= 0)
 	{
-		//×ÀÃæÓÒ·½ÏÔÊ¾²»ÏÂ¾ØĞÎ
+		//æ¡Œé¢å³æ–¹æ˜¾ç¤ºä¸ä¸‹çŸ©å½¢
 		rectTemp = rect;
 		rectTemp.top = rect.top + rect.Height() + space * 2;;
 		rectTemp.bottom = rect.bottom + rect.Height() + space * 2;;
 		rect = rectTemp;
 	}
 
-	//´´½¨¿Õ»­Ë¢»­¾ØĞÎ
+	//åˆ›å»ºç©ºç”»åˆ·ç”»çŸ©å½¢
 	CBrush * pOldBrush;
 	pOldBrush = pDC->SelectObject(CBrush::FromHandle((HBRUSH)GetStockObject(NULL_BRUSH)));
 
 	pDC->Rectangle(rect);
 	rect.top += 2;
-	//ÔÚ¾ØĞÎÖĞÏÔÊ¾ÎÄ×Ö
+	//åœ¨çŸ©å½¢ä¸­æ˜¾ç¤ºæ–‡å­—
 	CRect outRect(rect.left, rect.top, rect.left + lineLength, rect.top + charHeight);
-	CString string(_T("¶¥µãÎ»ÖÃ"));
+	CString string(_T("é¡¶ç‚¹ä½ç½®"));
 	pDC->DrawText(string, outRect, DT_CENTER);
 
 	outRect.SetRect(rect.left, rect.top + charHeight, rect.left + lineLength, charHeight + rect.top + charHeight);
@@ -533,7 +533,7 @@ void CCatchScreenDlg::DrawMessage(CRect &inRect, CDC * pDC)
 
 
 	outRect.SetRect(rect.left, rect.top + charHeight * 2, rect.left + lineLength, charHeight + rect.top + charHeight * 2);
-	string = _T("¾ØĞÎ´óĞ¡");
+	string = _T("çŸ©å½¢å¤§å°");
 	pDC->DrawText(string, outRect, DT_CENTER);
 
 	outRect.SetRect(rect.left, rect.top + charHeight * 3, rect.left + lineLength, charHeight + rect.top + charHeight * 3);
@@ -541,7 +541,7 @@ void CCatchScreenDlg::DrawMessage(CRect &inRect, CDC * pDC)
 	pDC->DrawText(string, outRect, DT_CENTER);
 
 	outRect.SetRect(rect.left, rect.top + charHeight * 4, rect.left + lineLength, charHeight + rect.top + charHeight * 4);
-	string = _T("¹â±ê×ø±ê");
+	string = _T("å…‰æ ‡åæ ‡");
 	pDC->DrawText(string, outRect, DT_CENTER);
 
 	outRect.SetRect(rect.left, rect.top + charHeight * 5, rect.left + lineLength, charHeight + rect.top + charHeight * 5);
@@ -554,14 +554,14 @@ void CCatchScreenDlg::DrawMessage(CRect &inRect, CDC * pDC)
 	pDC->SelectObject(pOldPen);
 }
 
-// Ë¢ĞÂ¾Ö²¿´°¿Ú
+// åˆ·æ–°å±€éƒ¨çª—å£
 void CCatchScreenDlg::InvalidateRgnWindow()
 {
-	//»ñÈ¡µ±È«ÆÁ¶Ô»°¿ò´°¿Ú´óĞ¡
+	//è·å–å½“å…¨å±å¯¹è¯æ¡†çª—å£å¤§å°
 	CRect rect1;
 	GetWindowRect(rect1);
 
-	//»ñÈ¡±à¼­¿ò´°¿Ú´óĞ¡
+	//è·å–ç¼–è¾‘æ¡†çª—å£å¤§å°
 	CRect rect2;
 	m_tipEdit.GetWindowRect(rect2);
 
@@ -569,10 +569,10 @@ void CCatchScreenDlg::InvalidateRgnWindow()
 	rgn1.CreateRectRgnIndirect(rect1);
 	rgn2.CreateRectRgnIndirect(rect2);
 
-	//»ñÈ¡¸üĞÂÇøÓò,¾ÍÊÇ³ıÁË±à¼­¿ò´°¿Ú²»¸üĞÂ
+	//è·å–æ›´æ–°åŒºåŸŸ,å°±æ˜¯é™¤äº†ç¼–è¾‘æ¡†çª—å£ä¸æ›´æ–°
 	//m_rgn.CombineRgn(&rgn1, &rgn2, RGN_DIFF);
 
-	// Ìí¼ÓToolBar²»Ë¢ĞÂ
+	// æ·»åŠ ToolBarä¸åˆ·æ–°
 	CRect rect3;
 	::GetWindowRect(m_toolBar.GetHWND(),&rect3);
 	CRgn rgn3;
@@ -601,11 +601,11 @@ void CCatchScreenDlg::UpdateMousePointRGBString()
 	gValue = GetGValue(color);
 	bValue = GetGValue(color);
 
-	//°´¸ñÊ½ÅÅ·Å×Ö·û´®
+	//æŒ‰æ ¼å¼æ’æ”¾å­—ç¬¦ä¸²
 	CString string;
-	string.Format(_T("\r\n\r\n¡¤µ±Ç°ÏñËØRGB(%d,%d,%d)"), rValue, gValue, bValue);
+	string.Format(_T("\r\n\r\nÂ·å½“å‰åƒç´ RGB(%d,%d,%d)"), rValue, gValue, bValue);
 
-	//Èç¹ûµ±Ç°ÑÕÉ«Ã»±äÔò²»Ë¢ĞÂRGBÖµ,ÒÔÃâ´°¿ÚÓĞ¸ü¶àÉÁË¸
+	//å¦‚æœå½“å‰é¢œè‰²æ²¡å˜åˆ™ä¸åˆ·æ–°RGBå€¼,ä»¥å…çª—å£æœ‰æ›´å¤šé—ªçƒ
 	if (strOld != string)
 	{
 		m_strRgb = string;
@@ -636,22 +636,22 @@ BOOL CCatchScreenDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 		switch(wmId)
 		{
 		case MyToolBar_ID:
-			AfxMessageBox(_T("¾ØĞÎ"));
+			AfxMessageBox(_T("çŸ©å½¢"));
 			break;
 		case MyToolBar_ID+1:
-			AfxMessageBox(_T("Ô²ĞÎ"));
+			AfxMessageBox(_T("åœ†å½¢"));
 			break;
 		case MyToolBar_ID +2:
-			AfxMessageBox(_T("»­±Ê"));
+			AfxMessageBox(_T("ç”»ç¬”"));
 			break;
 		case MyToolBar_ID +3:
-			AfxMessageBox(_T("ÂíÈü¿Ë"));
+			AfxMessageBox(_T("é©¬èµ›å…‹"));
 			break;
 		case MyToolBar_ID +4:
-			AfxMessageBox(_T("ÎÄ×Ö"));
+			AfxMessageBox(_T("æ–‡å­—"));
 			break;
 		case MyToolBar_ID +5:
-			AfxMessageBox(_T("³·Ïú"));
+			AfxMessageBox(_T("æ’¤é”€"));
 			break;
 		case MyToolBar_ID +6:
 			CopyScreenToBitmap(m_rectTracker.m_rect, TRUE);

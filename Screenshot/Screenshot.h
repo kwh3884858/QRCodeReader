@@ -1,16 +1,16 @@
-// Screenshot.h : PROJECT_NAME Ó¦ÓÃ³ÌĞòµÄÖ÷Í·ÎÄ¼ş
+// Screenshot.h : PROJECT_NAME åº”ç”¨ç¨‹åºçš„ä¸»å¤´æ–‡ä»¶
 //
 
 #pragma once
 
 #ifndef __AFXWIN_H__
-	#error "ÔÚ°üº¬´ËÎÄ¼şÖ®Ç°°üº¬¡°stdafx.h¡±ÒÔÉú³É PCH ÎÄ¼ş"
+	#error "åœ¨åŒ…å«æ­¤æ–‡ä»¶ä¹‹å‰åŒ…å«â€œstdafx.hâ€ä»¥ç”Ÿæˆ PCH æ–‡ä»¶"
 #endif
 
-#include "resource.h"		// Ö÷·ûºÅ
+#include "resource.h"		// ä¸»ç¬¦å·
 
 // CScreenshotApp:
-// ÓĞ¹Ø´ËÀàµÄÊµÏÖ£¬Çë²ÎÔÄ Screenshot.cpp
+// æœ‰å…³æ­¤ç±»çš„å®ç°ï¼Œè¯·å‚é˜… Screenshot.cpp
 //
 
 class CScreenshotApp : public CWinApp
@@ -18,7 +18,7 @@ class CScreenshotApp : public CWinApp
 public:
 	CScreenshotApp();
 
-// ÖØĞ´
+// é‡å†™
 	public:
 	virtual BOOL InitInstance();
 
@@ -26,7 +26,7 @@ public:
 	HWND m_hwndDlg;
 	virtual BOOL ProcessMessageFilter(int code, LPMSG lpMsg);
 
-// ÊµÏÖ
+// å®ç°
 
 	DECLARE_MESSAGE_MAP()
 private:
