@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CScreenshotDlg, CDialog)
 	ON_BN_CLICKED(IDC_BTN_START, &CScreenshotDlg::OnBnClickedBtnStart)
 	ON_WM_CTLCOLOR()
 	ON_WM_MOUSEMOVE()
+	ON_WM_HOTKEY()
 END_MESSAGE_MAP()
 
 
@@ -49,12 +50,20 @@ BOOL CScreenshotDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
+	bool isOk = ::RegisterHotKey(GetSafeHwnd(), 1, MOD_ALT | MOD_CONTROL, 'D');  //0x44 is 'd'
 
 	// 使窗体在最顶层
 	::SetWindowPos(GetSafeHwnd(), HWND_TOPMOST, 150, 150, 0, 0, 
 		SWP_NOMOVE|SWP_NOSIZE|SWP_NOREDRAW);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+}
+
+void CScreenshotDlg::OnCancel()
+{
+	CDialog::OnCancel();
+
+	::UnregisterHotKey(GetSafeHwnd(), 1);
 }
 
 // 如果向对话框添加最小化按钮，则需要下面的代码
@@ -91,6 +100,11 @@ void CScreenshotDlg::OnPaint()
 HCURSOR CScreenshotDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
+}
+
+void CScreenshotDlg::OnHotKey(UINT nHotKeyId, UINT nKey1, UINT nKey2)
+{
+	OnBnClickedBtnStart();
 }
 
 //----------------------------------------------------------------------

@@ -23,8 +23,11 @@ protected:
 
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
+	virtual void OnCancel();
+
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+	afx_msg void OnHotKey(UINT nHotKeyId, UINT nKey1, UINT nKey2);
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedBtnStart();
