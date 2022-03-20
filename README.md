@@ -7,7 +7,6 @@
 
 找了半天没有合适的现成软件可用，因此花了半天写了这个项目
 
----
 
 ## 特点
 
@@ -74,7 +73,6 @@ https://cmake.org/download/
 
 6. 运行项目。
 
----
 
 # English Version
 
@@ -82,7 +80,6 @@ Since there is a need to scan QR codes on a PC recently, I hope to have a lightw
 
 After looking for a long time, there is no suitable ready-made software available, so I spent half a day writing this project
 
----
 
 ## Features
 
@@ -132,7 +129,7 @@ Enter the following code:
 
 2. Go to the project folder:
 
- ```cd QRCodeReader````
+```cd QRCodeReader```
 
 3. Initialize the submodule library.
 
