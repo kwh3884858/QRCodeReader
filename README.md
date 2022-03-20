@@ -1,106 +1,149 @@
 
-##### 说明
+# QR Code Reader
 
-硬盘上的一份截图代码，作者是[sudami](https://bbs.pediy.com/thread-54302.htm)。
+[English Version](#english-version)
 
-提取了里面的3个类CatchScreenDlg、MyTracker.h，MyEdit，自己在实现下。
+由于最近有在PC上扫描二维码的需求，便希望有一个轻量化的软件能够实现简单，快捷的扫描并打开二维码所指向网址的功能．
 
-双缓冲，完美无闪烁。
+找了半天没有合适的现成软件可用，因此花了半天写了这个项目
 
-##### 截图
+---
 
-![snatshot.png](snatshot.png)
+## 特点
 
+- 开箱即用, 不需要额外配置
 
-##### 说明
+- 快速，只做一件时间，扫描二维码并打开．所截的图在剪贴板里，所以它也是个截图软件
 
-1、重写了MyEdit的绘制，避免闪烁。
-
-2、修改CCatchScreenDlg中部分逻辑，避免闪烁
-
-3、增加ToolBar控件，仿QQ截图界面。按钮实际功能未开发。
-
-4、实现截图飞选中区域暗色处理
+- 安全，不需要安装，不发送任何数据
 
 
-##### ToolBar控件消息处理
+## 演示
 
-```c++
-BOOL CCatchScreenDlg::OnCommand(WPARAM wParam, LPARAM lParam)
-{
-	bool bHandle = true;
-	HWND hWnd = m_toolBar.GetHWND();
-	if(lParam == (LPARAM)m_toolBar.GetHWND())
-	{
-		int wmId  = LOWORD(wParam);
-		switch(wmId)
-		{
-		case MyToolBar_ID:
-			AfxMessageBox(_T("矩形"));
-			break;
-		case MyToolBar_ID+1:
-			AfxMessageBox(_T("圆形"));
-			break;
-		case MyToolBar_ID +2:
-			AfxMessageBox(_T("画笔"));
-			break;
-		case MyToolBar_ID +3:
-			AfxMessageBox(_T("马赛克"));
-			break;
-		case MyToolBar_ID +4:
-			AfxMessageBox(_T("文字"));
-			break;
-		case MyToolBar_ID +5:
-			AfxMessageBox(_T("撤销"));
-			break;
-		case MyToolBar_ID +6:
-			CopyScreenToBitmap(m_rectTracker.m_rect, TRUE);
-			PostQuitMessage(0);
-			break;
-		case MyToolBar_ID +7:
-			PostQuitMessage(0);
-			break;
-		case MyToolBar_ID +8:
-			CopyScreenToBitmap(m_rectTracker.m_rect, TRUE);
-			PostQuitMessage(0);
-			break;
-		default:
-			bHandle = false;
-			break;
-		}
-		::SetFocus(hWnd);
-	}
-	if (bHandle == false)
-	{
-		return CDialog::OnCommand(wParam,lParam);
-	}
-}
-```
+![QRCodeReader.gif](QRCodeReader.gif)
 
 
-##### 神奇的非选中区域暗色处理算法
+## 使用说明
 
-```c++
-		Gdiplus::Graphics graphics(dcCompatible);
+1. 启动软件
 
-		HRGN hgn1 = CreateRectRgn(m_rectTracker.m_rect.left,m_rectTracker.m_rect.top,
-			m_rectTracker.m_rect.right,m_rectTracker.m_rect.bottom);
-		Region region1(hgn1);
+2. 点击Capture或者使用快捷键Control + Alt + D
 
-		HRGN hgn2 = CreateRectRgn(rect.left,rect.top,
-			rect.right,rect.bottom);
-		Region region2(hgn2);
+3. 点击拖动覆盖二维码所在区域, 如果能够识别, 会启动默认浏览器打开网址.
 
-		region2.Exclude(&region1);
+## 依赖
 
-		SolidBrush  solidBrush(Color(100, 128, 128, 128));
-		graphics.FillRegion(&solidBrush,&region2);
+屏幕截图:  [wanttobeno/Screenshot](https://github.com/wanttobeno/Screenshot)
 
-		DeleteObject(hgn1);
-		DeleteObject(hgn2);
-```
+二维码识别:  [nu-book/zxing-cpp](https://github.com/nu-book/zxing-cpp)
+
+## 部署
+
+本节将帮助您设置和构建QRCodeReader。
+
+首先，项目使用Cmake作为构建工具，所以需要下载安装Cmake。
+
+https://cmake.org/download/
+
+目前只支持Windows，所以我将介绍如何使用Cmake GUI来构建解决方案。
+
+在要存放项目的文件夹中打开 git bash。
+
+输入以下代码：
+
+1. 克隆项目：
+
+```git clone https://github.com/kwh3884858/QRCodeReader```
+
+2. 进入项目文件夹：
+
+ ```cd QRCodeReader```
 
 
+3. 初始化子模块库。
+
+```git submodule update --init --recursive```
+
+生成解决方案。
+
+请确保所有子模块都拉入文件夹库中
+
+4. 打开 Cmake GUI。将source code文件夹设置为项目的根目录，将birary文件夹设置为您喜欢的任何文件夹，这里我设置为Build文件夹。如果文件夹不存在，Cmake 会创建文件夹。点击Configurate, 选择您所需的编译项目, 然后点击Generate
+
+5. 打开 Build/QRCodeReader.sln, Rebuild Solution，然后将 QRCodeReader 设置为启动项目。
+
+6. 运行项目。
+
+---
+
+# English Version
+
+Since there is a need to scan QR codes on a PC recently, I hope to have a lightweight software that can easily and quickly scan and open the URL pointed to by the QR code.
+
+After looking for a long time, there is no suitable ready-made software available, so I spent half a day writing this project
+
+---
+
+## Features
+
+- Out of the box, no additional configuration required
+
+- Fast, only do one time, scan the QR code and open. The screenshot is in the clipboard, so it is also a screenshot software
+
+- Safe, no installation required, no data sent
 
 
+## Demo
 
+![QRCodeReader.gif](QRCodeReader.gif)
+
+
+## Instructions for use
+
+1. Start the software
+
+2. Click Capture or use the shortcut Control + Alt + D
+
+3. Click and drag to cover the area where the QR code is located. If it can be recognized, the default browser will be launched to open the URL.
+
+## dependencies
+
+Screenshot: [wanttobeno/Screenshot](https://github.com/wanttobeno/Screenshot)
+
+QR code recognition: [nu-book/zxing-cpp](https://github.com/nu-book/zxing-cpp)
+
+## deploy
+
+This section will help you set up and build QRCodeReader.
+
+First, the project uses Cmake as a build tool, so you need to download and install Cmake.
+
+https://cmake.org/download/
+
+Currently only Windows platform is supported, so I'll describe how to use the Cmake GUI to build the solution.
+
+Open git bash in the folder where you want to put the project.
+
+Enter the following code:
+
+1. Clone the project:
+
+```git clone https://github.com/kwh3884858/QRCodeReader```
+
+2. Go to the project folder:
+
+ ```cd QRCodeReader````
+
+3. Initialize the submodule library.
+
+```git submodule update --init --recursive```
+
+Generate a solution.
+
+Make sure all submodules are pulled into the folder library
+
+4. Open the Cmake GUI. Set the source code folder to the root of the project and the birary folder to whatever you like, here I set it as the Build folder. If the folder does not exist, Cmake will create the folder. Click Configure, select your desired build project, then click Generate
+
+5. Open Build/QRCodeReader.sln, Rebuild Solution, and set QRCodeReader as the startup project.
+
+6. Run the project.
