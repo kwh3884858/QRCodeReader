@@ -1,3 +1,6 @@
 [submodule "zxing-cpp"]
 	path = Library/zxing-cpp
 	url = https://github.com/kwh3884858/zxing-cpp.git
+[submodule "Library/opencv"]
+	path = Library/opencv
+	url = https://github.com/opencv/opencv.git
