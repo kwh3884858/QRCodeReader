@@ -419,6 +419,7 @@ HBITMAP CCatchScreenDlg::CopyScreenToBitmap(LPRECT lpRect, BOOL bSave)
 		bitmapInfo.bmiHeader.biCompression = BI_RGB;
 		GetDIBits(hMemDC, hBitmap, 0, nHeight, bitmapBits, &bitmapInfo, DIB_RGB_COLORS);
 		DecodeHints hints;
+		hints.setFormats(BarcodeFormat::QRCode);
 		ImageView image{ bitmapBits, nWidth, nHeight, ImageFormat::RGBX };
 		Results results = ReadBarcodes(image, hints);
 		if (!results.empty())
